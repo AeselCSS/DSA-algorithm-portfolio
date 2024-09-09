@@ -11,23 +11,29 @@ const binarySearch = (target: number, array: number[], comparefunction?: any) =>
     let min: number = 0;
     let max: number = array.length;
 
+    let iterations: number = 0;
     let isFound:boolean = false;
 
     // The while loop runs until the target number is found or the min index is greater than the max index
     while (!isFound && min < max) {
-        // The middle index is calculated
+        // increment the iterations counter
+        iterations++;
+        // calculate middle index
         let middle = Math.floor((min + max) / 2);
-        // The compare function is called with the target number and the number at the middle index
+        // call compare function with target number and the number at the middle index
         let c = compareFunc(target, array[middle]);
-    
+        
+        // evaluate the result of the compare function
         if (c > 0) min = middle + 1;
         if (c < 0) max = middle - 1;
         if (c == 0) {
             isFound = true;
+            console.log(`Number of iterations: ${iterations}`);
             return middle;
         }
     }
     // If the target number is not found in the array, the function returns -1
+    console.log(`Number of iterations: ${iterations}`);
     return -1;
 }
 
